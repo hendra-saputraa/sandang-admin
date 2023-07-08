@@ -45,10 +45,10 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? 'Edit billboard' : 'Create billboard';
-  const description = initialData ? 'Edit a billboard.' : 'Add a new billboard';
-  const toastMessage = initialData ? 'Billboard updated.' : 'Billboard created.';
-  const action = initialData ? 'Save changes' : 'Create';
+  const title = initialData ? 'Edit spanduk' : 'Buat spanduk';
+  const description = initialData ? 'Edit spanduk toko.' : 'Buat spanduk toko';
+  const toastMessage = initialData ? 'Spanduk diedit.' : 'Spanduk dibuat.';
+  const action = initialData ? 'Simpan' : 'Buat';
 
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
@@ -62,15 +62,15 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     try {
       setLoading(true);
       if (initialData) {
-        await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
+        await axios.patch(`/api/${params.storeId}/spanduk/${params.billboardId}`, data);
       } else {
-        await axios.post(`/api/${params.storeId}/billboards`, data);
+        await axios.post(`/api/${params.storeId}/spanduk`, data);
       }
       router.refresh();
-      router.push(`/${params.storeId}/billboards`);
+      router.push(`/${params.storeId}/spanduk`);
       toast.success(toastMessage);
     } catch (error: any) {
-      toast.error('Something went wrong.');
+      toast.error('Ada yang salah, mohon coba kembali.');
     } finally {
       setLoading(false);
     }
@@ -79,12 +79,12 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
+      await axios.delete(`/api/${params.storeId}/spanduk/${params.billboardId}`);
       router.refresh();
-      router.push(`/${params.storeId}/billboards`);
-      toast.success('Billboard deleted.');
+      router.push(`/${params.storeId}/spanduk`);
+      toast.success('Spanduk dihapus.');
     } catch (error: any) {
-      toast.error('Make sure you removed all categories using this billboard first.');
+      toast.error('Pastikan anda telah menghapus kategori pada spanduk ini.');
     } finally {
       setLoading(false);
       setOpen(false);
@@ -120,7 +120,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
               name="imageUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Background image</FormLabel>
+                  <FormLabel>Latar Belakang</FormLabel>
                   <FormControl>
                     <ImageUpload 
                       value={field.value ? [field.value] : []} 
@@ -141,7 +141,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                 <FormItem>
                   <FormLabel>Label</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="Billboard label" {...field} />
+                    <Input disabled={loading} placeholder="Label Spanduk" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

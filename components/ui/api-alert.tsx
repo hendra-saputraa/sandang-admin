@@ -28,7 +28,7 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
 }) => {
   const onCopy = (description: string) => {
     navigator.clipboard.writeText(description);
-    toast.success('API telah disalin.');
+    toast.success('API berhasil disalin.');
   };
 
   return ( 

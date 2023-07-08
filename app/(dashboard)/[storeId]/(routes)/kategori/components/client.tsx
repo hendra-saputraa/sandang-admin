@@ -34,7 +34,7 @@ export const CategoriesClient: React.FC<CategoriesClientProps> = ({
       <DataTable searchKey="name" columns={columns} data={data} />
       <Heading title="API" description="API untuk kategori" />
       <Separator />
-      <ApiList entityName="kategori" entityIdName="categoryId" />
+      <ApiList entityName="kategori" entityIdName="IdKategori" />
     </>
   );
 };
